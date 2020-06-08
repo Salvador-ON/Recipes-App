@@ -11,7 +11,7 @@ const NavBar = ({SetReset, SetFavorites}) => {
   return (
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" bg="success" variant="dark" className="fixed-top">
-        <Navbar.Brand href="#home">Cooking-Recipes  <FontAwesomeIcon icon={faUtensils} /> </Navbar.Brand>
+        <Navbar.Brand onClick={SetReset} href="#home">Cooking-Recipes  <FontAwesomeIcon icon={faUtensils} /> </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">

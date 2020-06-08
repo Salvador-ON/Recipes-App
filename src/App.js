@@ -23,9 +23,15 @@ function App() {
     useFavorites(value);
   };
 
+  const SetRecipesLikes = (value) => {
+    const recipesAfterLike = recipes.filter(recipe => recipe.recipe.calories !== value)
+    SetRecipes(recipesAfterLike);
+  };
+
 
   const SetFav = (dataRecipe) => {
     useSavedRecipes([...savedRecipes, dataRecipe]);
+    SetRecipesLikes(dataRecipe.recipe.calories);
   };
 
   const SetData = (data) => {
@@ -87,7 +93,7 @@ function App() {
         />
       ) : null}
       {searching && recipes.length === 0 ? ( <Waiting dataQuery={dataQuery}/> ) : null}
-      {recipes.length > 0 && !favorites? (<Recipes recipes={recipes} SetFav={SetFav} favorites={favorites} DeleteRecipe={DeleteRecipe}/> ) : null}
+      {recipes.length > 0 && !favorites? (<Recipes recipes={recipes} SetFav={SetFav} favorites={favorites} DeleteRecipe={DeleteRecipe} /> ) : null}
       {favorites ? (<Recipes recipes={savedRecipes} SetFav={SetFav} favorites={favorites} DeleteRecipe={DeleteRecipe} /> ) : null}
     </React.Fragment>
   );
