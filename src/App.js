@@ -1,25 +1,95 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Landing from "./components/Landing";
+import Waiting from "./components/Waiting";
+import NavBar from "./components/Navbar";
+import Recipes from "./components/Recipes";
 
 function App() {
+  let favRecipes = localStorage.getItem("favs")
+    ? JSON.parse(localStorage.getItem("favs"))
+    : [];
+
+  const [savedRecipes, useSavedRecipes] = React.useState(favRecipes);
+  const [welcome, useWelcome] = React.useState(true);
+  const [dataQuery, useDataQuery] = React.useState("");
+  const [searching, useSearching] = React.useState(false);
+  const [recipes, useRecipes] = React.useState([]);
+  const [favorites, useFavorites] = React.useState(false);
+  const [invalidQuery, useInvalidQuery] = React.useState(false);
+
+  
+
+  const SetFavorites = (value) => {
+    useFavorites(value);
+  };
+
+
+  const SetFav = (dataRecipe) => {
+    useSavedRecipes([...savedRecipes, dataRecipe]);
+  };
+
+  const SetData = (data) => {
+    useDataQuery(data);
+  };
+
+  const SetSearching = (data) => {
+    useSearching(data);
+  };
+
+  const SetWelcome = (data) => {
+    useWelcome(data);
+  };
+
+  const SetRecipes = (data) => {
+    useRecipes(data);
+  };
+
+  const SetReset = () => {
+    SetSearching(false);
+    SetData("");
+    SetWelcome(true);
+    SetRecipes([]);
+    SetFavorites(false)
+  };
+
+  const SetInvalid = value =>{
+    useInvalidQuery(value);
+    if(value){
+    SetReset();
+    }
+  }
+
+  const DeleteRecipe = value => {
+    const newSavedRecipes = savedRecipes.filter(recipe => recipe.recipe.calories !== value)
+    useSavedRecipes(newSavedRecipes)
+  }
+
+  React.useEffect( () => {
+    if(favRecipes){
+      localStorage.setItem('favs', JSON.stringify(savedRecipes))
+    }
+    else{
+      localStorage.setItem('favs', JSON.stringify([]))
+    }
+  },[savedRecipes, favRecipes]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <NavBar SetReset={SetReset} SetFavorites={SetFavorites}/>
+      {welcome && !favorites ? (
+        <Landing
+          SetData={SetData}
+          SetSearching={SetSearching}
+          SetWelcome={SetWelcome}
+          SetRecipes={SetRecipes}
+          SetInvalid={SetInvalid}
+          invalidQuery={invalidQuery}
+        />
+      ) : null}
+      {searching && recipes.length === 0 ? ( <Waiting dataQuery={dataQuery}/> ) : null}
+      {recipes.length > 0 && !favorites? (<Recipes recipes={recipes} SetFav={SetFav} favorites={favorites} DeleteRecipe={DeleteRecipe}/> ) : null}
+      {favorites ? (<Recipes recipes={savedRecipes} SetFav={SetFav} favorites={favorites} DeleteRecipe={DeleteRecipe} /> ) : null}
+    </React.Fragment>
   );
 }
 
