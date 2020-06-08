@@ -3,6 +3,7 @@ import logo from '../assets/ring.png';
 import character from '../assets/cut-food.png'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
+import PropTypes from 'prop-types';
 
 
 const Waiting = ({dataQuery}) => {
@@ -25,4 +26,9 @@ const Waiting = ({dataQuery}) => {
     );
 }
  
+Waiting.propTypes = {
+  dataQuery: PropTypes.string.isRequired,
+  
+};
+
 export default Waiting;

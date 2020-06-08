@@ -1,5 +1,6 @@
 import React from "react";
 import Recipe from "./Recipe";
+import PropTypes from 'prop-types';
 
 const Recipes = ({ recipes, SetFav, favorites, DeleteRecipe }) => {
   return (
@@ -27,5 +28,14 @@ const Recipes = ({ recipes, SetFav, favorites, DeleteRecipe }) => {
     </div>
   );
 };
+
+
+Recipes.propTypes = {
+  recipes: PropTypes.array.isRequired,
+  SetFav: PropTypes.func.isRequired,
+  favorites: PropTypes.bool.isRequired,
+  DeleteRecipe: PropTypes.func.isRequired,
+};
+
 
 export default Recipes;

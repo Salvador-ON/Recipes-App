@@ -1,5 +1,6 @@
 import React from 'react';
 import {Form, FormControl, Button, Alert } from "react-bootstrap";
+import PropTypes from 'prop-types';
 
 const Formsearch = ({SetData, SetSearching, SetWelcome, SetRecipes, SetInvalid, invalidQuery}) => {
   const [error, useError] = React.useState(invalidQuery);
@@ -83,5 +84,18 @@ const Formsearch = ({SetData, SetSearching, SetWelcome, SetRecipes, SetInvalid, 
     </React.Fragment>
   );
 }
+
+
+
+Formsearch.propTypes = {
+  SetData: PropTypes.func.isRequired,
+  SetSearching: PropTypes.func.isRequired,
+  SetWelcome: PropTypes.func.isRequired,
+  SetRecipes: PropTypes.func.isRequired,
+  SetInvalid: PropTypes.func.isRequired,
+  invalidQuery: PropTypes.bool.isRequired,
+
+};
+
  
 export default Formsearch;

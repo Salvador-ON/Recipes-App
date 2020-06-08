@@ -4,6 +4,7 @@ import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from 'prop-types';
 
 const Recipe = ({
   title,
@@ -45,6 +46,19 @@ const Recipe = ({
       </div>
     </div>
   );
+};
+
+
+
+  Recipe.propTypes = {
+  title: PropTypes.string.isRequired,
+  calories: PropTypes.number.isRequired,
+  ingredients: PropTypes.array.isRequired,
+  url: PropTypes.string.isRequired,
+  recipe: PropTypes.object.isRequired,
+  SetFav: PropTypes.func.isRequired,
+  favorites: PropTypes.bool.isRequired,
+  DeleteRecipe: PropTypes.func.isRequired,
 };
 
 export default Recipe;

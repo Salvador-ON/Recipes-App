@@ -2,12 +2,9 @@ import React from "react";
 import { Nav, Navbar} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils} from '@fortawesome/free-solid-svg-icons'
-
+import PropTypes from 'prop-types';
 
 const NavBar = ({SetReset, SetFavorites}) => {
-
-  
-  
   return (
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" bg="success" variant="dark" className="fixed-top">
@@ -25,6 +22,12 @@ const NavBar = ({SetReset, SetFavorites}) => {
       </Navbar>
     </React.Fragment>
   );
+};
+
+
+NavBar.propTypes = {
+  SetReset: PropTypes.func.isRequired,
+  SetFavorites: PropTypes.func.isRequired,
 };
 
 export default NavBar;

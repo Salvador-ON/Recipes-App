@@ -4,6 +4,7 @@ import character from '../assets/cut-food.png'
 import Formsearch from './Formsearch'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css'
+import PropTypes from 'prop-types';
 
 
 const Landing = ({SetData, SetSearching, SetWelcome, SetRecipes, SetInvalid, invalidQuery}) => {
@@ -25,5 +26,16 @@ const Landing = ({SetData, SetSearching, SetWelcome, SetRecipes, SetInvalid, inv
     </div>
     );
 }
+
+
+Landing.propTypes = {
+  SetData: PropTypes.func.isRequired,
+  SetSearching: PropTypes.func.isRequired,
+  SetWelcome: PropTypes.func.isRequired,
+  SetRecipes: PropTypes.func.isRequired,
+  SetInvalid: PropTypes.func.isRequired,
+  invalidQuery: PropTypes.bool.isRequired,
+
+};
  
 export default Landing;
